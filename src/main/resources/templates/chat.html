@@ -17,7 +17,7 @@
     <input type="submit">
 </form>
 <div th:each="chatMessage : ${chatMessages}">
-    <span th:text="${chatMessage.username}">username</span>: <span th:text="${chatMessage.message}" th:unless="${chatMessage.hasBannedWord()}">message</span>
+    <span th:text="${chatMessage.username}">username</span>: <span th:text="${chatMessage.message}">message</span>
 </div>
 <a href="/">Go to /</a>
 </body>

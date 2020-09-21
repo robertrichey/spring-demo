@@ -5,10 +5,9 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class ChatMessage {
-    private int id;
+    private Integer messageid;
     private String username;
-    private String message;
-    private static Set<String> bannedWordList = new HashSet<>(Arrays.asList("a", "b", "c"));
+    private String messagetext;
 
     public String getUsername() {
         return username;
@@ -19,19 +18,10 @@ public class ChatMessage {
     }
 
     public String getMessage() {
-        return message;
+        return messagetext;
     }
 
     public void setMessage(String message) {
-        this.message = message;
-    }
-
-    public boolean hasBannedWord() {
-        for (String s : bannedWordList) {
-            if (message.contains(s)) {
-                return true;
-            }
-        }
-        return false;
+        this.messagetext = message;
     }
 }

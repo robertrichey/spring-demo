@@ -2,19 +2,24 @@ package com.udacity.java.course1.review.mapper;
 
 import com.udacity.java.course1.review.model.ChatMessage;
 import com.udacity.java.course1.review.model.User;
-import org.apache.ibatis.annotations.Delete;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Options;
-import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.*;
+import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
+@Mapper
 public interface MessageMapper {
-    @Select("SELECT * FROM MESSAGES WHERE messageid = #{id}")
-    User findUser(Integer id);
+    @Select("SELECT * FROM MESSAGES")
+    List<ChatMessage> getMessages();
 
-    @Insert("INSERT INTO MESSAGES (username, message) VALUES " +
+    @Select("SELECT * FROM MESSAGES WHERE username = #{username}")
+    User findUser(String username);
+
+    @Insert("INSERT INTO MESSAGES (username, messagetext) VALUES " +
             "(#{username}, #{message})")
-    @Options(useGeneratedKeys = true, keyProperty = "messageid")
-    Integer insert(ChatMessage chatMessage);
+    // @Options(useGeneratedKeys = true, keyProperty = "messageid")
+    @Options(useGeneratedKeys = true)
+    void insert(ChatMessage chatMessage);
 
     @Delete("DELETE FROM MESSAGES WHERE messageid = #{id}")
     void delete(Integer id);

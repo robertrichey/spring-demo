@@ -1,7 +1,9 @@
 package com.udacity.java.course1.review.service;
 
+import com.udacity.java.course1.review.mapper.MessageMapper;
 import com.udacity.java.course1.review.model.ChatForm;
 import com.udacity.java.course1.review.model.ChatMessage;
+import com.udacity.java.course1.review.model.User;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
@@ -10,12 +12,15 @@ import java.util.List;
 
 @Service
 public class MessageService {
-    private List<ChatMessage> chatMessages;
+    private MessageMapper messageMapper;
+
+    public MessageService(MessageMapper messageMapper) {
+        this.messageMapper = messageMapper;
+    }
 
     @PostConstruct
     public void postConstruct() {
         System.out.println("Creating MessageService");
-        chatMessages = new ArrayList<>();
     }
 
     public void addMessage(ChatForm chatForm) {
@@ -33,10 +38,12 @@ public class MessageService {
                 newMessage.setMessage(chatForm.getMessageText().toLowerCase());
                 break;
         }
-        chatMessages.add(newMessage);
+        messageMapper.insert(newMessage);
+        System.out.println(messageMapper.getMessages().get(0).getMessage());
+        System.out.println(newMessage.getMessage());
     }
 
     public List<ChatMessage> getChatMessages() {
-        return chatMessages;
+        return messageMapper.getMessages();
     }
 }
