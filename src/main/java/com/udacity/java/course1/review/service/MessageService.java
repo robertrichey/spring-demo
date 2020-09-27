@@ -39,8 +39,6 @@ public class MessageService {
                 break;
         }
         messageMapper.insert(newMessage);
-        System.out.println(messageMapper.getMessages().get(0).getMessage());
-        System.out.println(newMessage.getMessage());
     }
 
     public List<ChatMessage> getChatMessages() {
