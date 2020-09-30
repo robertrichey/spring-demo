@@ -12,6 +12,9 @@ public class ChatPage {
     @FindBy(id = "submit-button")
     private WebElement submitButton;
 
+    @FindBy(id = "chatmsg")
+    private WebElement chatMessage;
+
     public ChatPage(WebDriver driver) {
         PageFactory.initElements(driver, this);
     }
@@ -22,5 +25,9 @@ public class ChatPage {
 
     public void clickSubmit() {
         submitButton.click();
+    }
+
+    public String getChat() {
+        return chatMessage.getText();
     }
 }
